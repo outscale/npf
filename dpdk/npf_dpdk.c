@@ -28,6 +28,7 @@
 #include <string.h>
 #include <net/if.h>
 
+#include <rte_config.h>
 #include <rte_common.h>
 #include <rte_eal.h>
 #include <rte_mempool.h>
@@ -137,8 +138,7 @@ dpdk_mbuf_alloc(int type, int flags)
 static void
 dpdk_mbuf_free(struct mbuf *m0)
 {
-	struct rte_mbuf *m = (void *)m0;
-	rte_pktmbuf_free(m);
+	(void)m0;
 }
 
 static void *

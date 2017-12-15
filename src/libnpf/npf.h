@@ -101,7 +101,7 @@ int		npf_rule_setprio(nl_rule_t *, int);
 int		npf_rule_setproc(nl_rule_t *, const char *);
 int		npf_rule_setkey(nl_rule_t *, const void *, size_t);
 int		npf_rule_setinfo(nl_rule_t *, const void *, size_t);
-const char *	npf_rule_getname(nl_rule_t *);
+const char *    npf_rproc_getname_int(nl_rproc_t *);
 uint32_t	npf_rule_getattr(nl_rule_t *);
 const char *	npf_rule_getinterface(nl_rule_t *);
 const void *	npf_rule_getinfo(nl_rule_t *, size_t *);
@@ -117,7 +117,8 @@ nl_rproc_t *	npf_rproc_create(const char *);
 int		npf_rproc_extcall(nl_rproc_t *, nl_ext_t *);
 bool		npf_rproc_exists_p(nl_config_t *, const char *);
 int		npf_rproc_insert(nl_config_t *, nl_rproc_t *);
-const char *	npf_rproc_getname(nl_rproc_t *);
+const char *   npf_rule_getname(nl_rule_t *);
+#define npf_rproc_getname(rp) npf_rproc_getname_int(rp)
 
 nl_nat_t *	npf_nat_create(int, unsigned, const char *);
 int		npf_nat_setaddr(nl_nat_t *, int, npf_addr_t *, npf_netmask_t);
@@ -156,6 +157,7 @@ nl_rule_t *	npf_rule_iterate(nl_config_t *, nl_iter_t *, unsigned *);
 nl_nat_t *	npf_nat_iterate(nl_config_t *, nl_iter_t *);
 nl_rproc_t *	npf_rproc_iterate(nl_config_t *, nl_iter_t *);
 nl_table_t *	npf_table_iterate(nl_config_t *, nl_iter_t *);
+
 
 int		_npf_ruleset_list(int, const char *, nl_config_t *);
 void		_npf_debug_addif(nl_config_t *, const char *);
