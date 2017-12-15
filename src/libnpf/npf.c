@@ -769,7 +769,7 @@ npf_rproc_iterate(nl_config_t *ncf)
 }
 
 const char *
-npf_rproc_getname(nl_rproc_t *rp)
+npf_rproc_getname_int(nl_rproc_t *rp)
 {
 	return dnvlist_get_string(rp->rproc_dict, "name", NULL);
 }
