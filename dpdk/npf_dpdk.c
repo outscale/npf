@@ -39,6 +39,7 @@
 typedef struct ifnet {
 	struct if_nameindex	ini;
 	void *			arg;
+	npf_t *			npf;
 	LIST_ENTRY(ifnet)	entry;
 } ifnet_t;
 
@@ -71,6 +72,7 @@ npf_dpdk_ifattach(npf_t *npf, const char *name, unsigned idx)
 	}
 	ifp->ini.if_name = (char *)(uintptr_t)name;
 	ifp->ini.if_index = idx;
+	ifp->npf = npf;
 	LIST_INSERT_HEAD(&dpdk_ifnet_list, ifp, entry);
 	npf_ifmap_attach(npf, ifp);
 	return ifp;
@@ -91,24 +93,26 @@ dpdk_ifop_getname(ifnet_t *ifp)
 }
 
 static ifnet_t *
-dpdk_ifop_lookup(const char *ifname)
+dpdk_ifop_lookup(npf_t *npf, const char *ifname)
 {
 	ifnet_t *ifp;
 
 	LIST_FOREACH(ifp, &dpdk_ifnet_list, entry) {
-		if (!strcmp(ifp->ini.if_name, ifname))
+		if (npf == ifp->npf &&
+		    !strcmp(ifp->ini.if_name, ifname))
 			break;
 	}
 	return ifp;
 }
 
 static void
-dpdk_ifop_flush(void *arg)
+dpdk_ifop_flush(npf_t *npf, void *arg)
 {
 	ifnet_t *ifp;
 
 	LIST_FOREACH(ifp, &dpdk_ifnet_list, entry) {
-		ifp->arg = arg;
+		if (npf == ifp->npf)
+			ifp->arg = arg;
 	}
 }
 
