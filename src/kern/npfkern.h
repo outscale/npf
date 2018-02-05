@@ -44,8 +44,8 @@ struct ifnet;
 
 typedef struct {
 	const char *	(*getname)(struct ifnet *);
-	struct ifnet *	(*lookup)(const char *);
-	void		(*flush)(void *);
+	struct ifnet *	(*lookup)(npf_t *, const char *);
+	void		(*flush)(npf_t *, void *);
 	void *		(*getmeta)(const struct ifnet *);
 	void		(*setmeta)(struct ifnet *, void *);
 } npf_ifops_t;
