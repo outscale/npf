@@ -64,7 +64,7 @@ npf_ifmap_init(npf_t *npf, const npf_ifops_t *ifops)
 	const size_t nbytes = sizeof(npf_ifmap_t) * NPF_MAX_IFMAP;
 
 	KASSERT(ifops != NULL);
-	ifops->flush((void *)(uintptr_t)0);
+	ifops->flush(npf, (void *)(uintptr_t)0);
 
 	npf->ifmap = kmem_zalloc(nbytes, KM_SLEEP);
 	npf->ifmap_cnt = 0;
@@ -125,7 +125,7 @@ npf_ifmap_register(npf_t *npf, const char *ifname)
 	nim = &npf->ifmap[i - 1];
 	strlcpy(nim->n_ifname, ifname, IFNAMSIZ);
 
-	if ((ifp = npf->ifops->lookup(ifname)) != NULL) {
+	if ((ifp = npf->ifops->lookup(npf, ifname)) != NULL) {
 		npf->ifops->setmeta(ifp, (void *)(uintptr_t)i);
 	}
 out:
@@ -142,7 +142,7 @@ npf_ifmap_flush(npf_t *npf)
 		npf->ifmap[i].n_ifname[0] = '\0';
 	}
 	npf->ifmap_cnt = 0;
-	npf->ifops->flush((void *)(uintptr_t)0);
+	npf->ifops->flush(npf, (void *)(uintptr_t)0);
 }
 
 u_int
