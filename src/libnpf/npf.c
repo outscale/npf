@@ -1037,7 +1037,7 @@ npf_table_iterate(nl_config_t *ncf)
 }
 
 unsigned
-npf_table_getid(nl_table_t *tl)
+npf_table_getid_int(nl_table_t *tl)
 {
 	return dnvlist_get_number(tl->table_dict, "id", (unsigned)-1);
 }
