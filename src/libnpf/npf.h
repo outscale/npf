@@ -128,7 +128,8 @@ const void *	npf_rule_getcode(nl_rule_t *, int *, size_t *);
 
 nl_table_t *	npf_table_iterate(nl_config_t *);
 const char *	npf_table_getname(nl_table_t *);
-unsigned	npf_table_getid(nl_table_t *);
+#define npf_table_getid(tl) npf_table_getid_int(tl)
+unsigned	npf_table_getid_int(nl_table_t *);
 int		npf_table_gettype(nl_table_t *);
 
 nl_nat_t *	npf_nat_iterate(nl_config_t *);
