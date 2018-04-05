@@ -95,6 +95,7 @@ bool		npf_rule_exists_p(nl_config_t *, const char *);
 int		npf_rule_insert(nl_config_t *, nl_rule_t *, nl_rule_t *);
 void *		npf_rule_export(nl_rule_t *, size_t *);
 void		npf_rule_destroy(nl_rule_t *);
+uint32_t	npf_rule_getattr(nl_rule_t *);
 
 nl_rproc_t *	npf_rproc_create(const char *);
 int		npf_rproc_extcall(nl_rproc_t *, nl_ext_t *);
@@ -122,7 +123,6 @@ void		npf_table_destroy(nl_table_t *);
 
 nl_rule_t *	npf_rule_iterate(nl_config_t *, unsigned *);
 const char *	npf_rule_getname(nl_rule_t *);
-uint32_t	npf_rule_getattr(nl_rule_t *);
 const char *	npf_rule_getinterface(nl_rule_t *);
 const void *	npf_rule_getinfo(nl_rule_t *, size_t *);
 const char *	npf_rule_getproc(nl_rule_t *);
