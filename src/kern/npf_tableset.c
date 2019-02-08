@@ -446,12 +446,6 @@ npf_table_destroy(npf_table_t *t)
 	kmem_free(t, sizeof(npf_table_t));
 }
 
-u_int
-npf_table_getid(npf_table_t *t)
-{
-	return t->t_id;
-}
-
 /*
  * npf_table_check: validate the name, ID and type.
  */
