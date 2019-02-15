@@ -101,6 +101,7 @@ npf_destroy(npf_t *npf)
 	npf_conn_fini(npf);
 	npf_ifmap_fini(npf);
 
+	pserialize_unregister(npf->qsbr);
 	pserialize_destroy(npf->qsbr);
 	percpu_free(npf->stats_percpu, NPF_STATS_SIZE);
 	kmem_free(npf, sizeof(npf_t));
