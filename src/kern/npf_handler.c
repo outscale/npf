@@ -306,7 +306,6 @@ out:
 
 	if (*mp) {
 		/* Free the mbuf chain. */
-		m_freem(*mp);
 		*mp = NULL;
 	}
 	return error;

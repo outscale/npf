@@ -533,8 +533,6 @@ npf_rule_insert(nl_config_t *ncf, nl_rule_t *parent, nl_rule_t *rl)
 		key = "__rules";
 	}
 	nvlist_append_nvlist_array(target, key, rule_dict);
-	nvlist_destroy(rule_dict);
-	free(rl);
 	return 0;
 }
 
