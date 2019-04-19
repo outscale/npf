@@ -138,6 +138,7 @@ npf_conndb_destroy(npf_conndb_t *cd)
 
 	thmap_destroy(cd->cd_map);
 	kmem_free(cd, sizeof(npf_conndb_t));
+	cd = NULL;
 }
 
 /*
