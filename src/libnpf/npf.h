@@ -69,8 +69,10 @@ typedef int (*npf_conn_func_t)(unsigned, const npf_addr_t *,
  * API functions.
  */
 
-nl_config_t *	npf_config_create(void);
-void		npf_config_destroy(nl_config_t *);
+nl_config_t *	npf_config_create_int(void);
+#define npf_config_create() npf_config_create_int()
+void		npf_config_destroy_int(nl_config_t *);
+#define npf_config_destroy(cfg) npf_config_destroy_int(cfg)
 int		npf_config_submit(nl_config_t *, int, npf_error_t *);
 nl_config_t *	npf_config_retrieve(int);
 int		npf_config_flush(int);
@@ -140,7 +142,8 @@ int		npf_conn_list(int, npf_conn_func_t, void *);
 
 nl_table_t *	npf_table_create(const char *, unsigned, int);
 const char *	npf_table_getname(nl_table_t *);
-unsigned	npf_table_getid(nl_table_t *);
+unsigned	npf_table_getid_int(nl_table_t *);
+#define npf_table_getid(cfg) npf_table_getid_int(cfg)
 int		npf_table_gettype(nl_table_t *);
 int		npf_table_add_entry(nl_table_t *, int,
 		    const npf_addr_t *, const npf_netmask_t);

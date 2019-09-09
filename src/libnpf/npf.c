@@ -231,7 +231,7 @@ _npf_extract_error(nvlist_t *resp, npf_error_t *errinfo)
  */
 
 nl_config_t *
-npf_config_create(void)
+npf_config_create_int(void)
 {
 	nl_config_t *ncf;
 
